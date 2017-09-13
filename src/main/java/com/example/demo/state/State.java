@@ -11,10 +11,20 @@ import java.util.Map;
  */
 public abstract class State {
 
+    /**
+     * 支付动作
+     * @param context
+     * @return
+     */
     public Object pay(Map<String, Object> context){
         return null;
     }
 
+    /**
+     * 发货动作
+     * @param context
+     * @return
+     */
     public Object delivery(Map<String, Object> context){
         return null;
     }

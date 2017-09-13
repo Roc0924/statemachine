@@ -1,0 +1,13 @@
+statemachine:
+  actions:
+    - name: pay
+      source: COMMIT
+      destination: PAID
+      state: commitState
+      method: pay
+
+    - name: delivery
+      source: PAID
+      destination: DELIVERED
+      state: paidState
+      method: delivery

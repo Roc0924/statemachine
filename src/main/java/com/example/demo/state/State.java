@@ -7,7 +7,7 @@ import java.util.Map;
  * Author               : wangzhenpeng
  * Date                 : 2017/8/30
  * Time                 : 10:57
- * Description          :
+ * Description          : 状态父类
  */
 public abstract class State {
 

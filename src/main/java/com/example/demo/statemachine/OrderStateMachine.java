@@ -13,6 +13,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * Create with IntelliJ IDEA
@@ -50,11 +53,31 @@ public class OrderStateMachine extends AbstractStateMachine {
     }
 
     @Override
-    public Object execute(String action, Map<String, Object> context) {
-        State state = (State) this.actionBox.get(action).get("state");
-        Method method = null;
+    public Object execute(String action, final Map<String, Object> context) {
+        final State state = (State) this.actionBox.get(action).get("state");
+//        method = null;
         try {
-            method = State.class.getDeclaredMethod(this.actionBox.get(action).get("method").toString(), Map.class);
+            final Method  method = State.class.getDeclaredMethod(this.actionBox.get(action).get("method").toString(), Map.class);
+//            Map<String, Object> context = new HashMap<>();
+
+            Future future = executor.submit(new Callable<Object>() {
+//                State state = this.state;
+                @Override
+                public Object call() throws Exception {
+                    return method.invoke(state, context);
+                }
+            });
+
+
+
+            try {
+                System.out.println(future.get().toString());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
 
             return method.invoke(state, new HashMap<String, Object>());
         } catch (Exception e) {

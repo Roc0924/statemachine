@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public abstract class AbstractStateMachine {
     BlockingQueue queue = new LinkedBlockingQueue();
-    ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 6, 1, TimeUnit.DAYS, queue);
+    ThreadPoolExecutor executor = new ThreadPoolExecutor(30, 60, 1, TimeUnit.DAYS, queue);
 
     public Map<String, Map<String, Object>> actionBox;
 

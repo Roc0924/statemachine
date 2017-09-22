@@ -67,9 +67,6 @@ public class OrderStateMachine extends AbstractStateMachine {
                     return method.invoke(state, context);
                 }
             });
-
-
-
             try {
                 System.out.println(future.get().toString());
             } catch (InterruptedException e) {
@@ -77,9 +74,23 @@ public class OrderStateMachine extends AbstractStateMachine {
             } catch (ExecutionException e) {
                 e.printStackTrace();
             }
+            return future.get().toString();
+
+//            executor.execute(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        method.invoke(state, context);
+//                    } catch (IllegalAccessException e) {
+//                        e.printStackTrace();
+//                    } catch (InvocationTargetException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
 
 
-            return method.invoke(state, new HashMap<String, Object>());
+//            return method.invoke(state, context);
         } catch (Exception e) {
             e.printStackTrace();
         }

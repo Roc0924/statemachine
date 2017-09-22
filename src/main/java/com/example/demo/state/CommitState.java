@@ -17,7 +17,11 @@ import java.util.Map;
 public class CommitState extends State {
     @Override
     public Object pay(Map<String, Object> context) {
-        System.out.println("commit -> paid");
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "commit -> paid";
     }
 }

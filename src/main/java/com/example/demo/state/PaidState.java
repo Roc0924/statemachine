@@ -16,7 +16,11 @@ import java.util.Map;
 public class PaidState extends State {
     @Override
     public Object delivery(Map<String, Object> context) {
-        System.out.println("paid -> delivery");
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "paid -> delivery";
     }
 }
